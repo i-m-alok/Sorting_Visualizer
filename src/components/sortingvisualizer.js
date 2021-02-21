@@ -3,11 +3,7 @@ import insertionSort from "../algorithms/insertion_sort_recursive";
 export default function SortingVisualizer(props) {
   const [array, setArray] = useState([]);
   const resetArray = () => {
-    let arr = [];
-    for (let i = 0; i < 100; i++) {
-      arr.push(randomArrayBetweenXnY(5, 100));
-    }
-    setArray(arr);
+    props.resetArray(setArray);
   };
 
   const insertion_sort = (arr) => {
@@ -28,7 +24,9 @@ export default function SortingVisualizer(props) {
         ))}
       </div>
       <div className="btns-container">
-        <button onClick={() => resetArray()}>Generate</button>
+        <button data-test="generate-new-array-btn" onClick={() => resetArray()}>
+          Generate
+        </button>
         <button onClick={() => insertion_sort()}>Insertion Sort</button>
       </div>
       {console.log("array", array)}
@@ -36,7 +34,3 @@ export default function SortingVisualizer(props) {
     </div>
   );
 }
-
-const randomArrayBetweenXnY = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
